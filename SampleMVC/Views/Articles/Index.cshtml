@@ -1,0 +1,44 @@
+﻿<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Category Page</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Category Page</h6>
+            </div>
+            <div class="card-body">
+                <!-- Example single danger button -->
+
+                <form asp-action="Paging">
+                    <div class="dropdown">
+                        <select name="selectedOption" class="btn btn-primary dropdown-toggle">
+                            @foreach (var category in Model.DataObject1)
+                            {
+                                if (Convert.ToInt32(ViewData["ID"]) == category.CategoryID)
+                                {
+                                    <option value="@category.CategoryID" selected="selected">@category.CategoryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@category.CategoryID">@category.CategoryName</option>
+                                }
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-primary m-2">Submit</button>
+                    </div>
+
+                    <br />
+                </form>
+
+             
+                
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

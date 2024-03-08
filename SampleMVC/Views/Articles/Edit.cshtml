@@ -1,0 +1,44 @@
+﻿<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Add Category</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Add Category</h6>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/Articles/Edit">
+                    <div class="form-group">
+                        <label for="ArticleID">ArticleID :</label>
+                        <input type="text" class="form-control" name="ArticleID"
+                               value="@Model.ArticleID" readonly />
+                        <br />
+                        <label for="CategoryID">CategoryID :</label>
+                        <input type="text" class="form-control" name="CategoryID"
+                               value="@Model.CategoryID" readonly />
+                        <br />
+                        <label for="Title">Title :</label>
+                        <input type="text" class="form-control" name="Title"
+                               value="@Model.Title" placeholder="Edit Title" />
+                        <br />
+                        <label for="Details">Details :</label>
+                        <input type="text" class="form-control" name="Details"
+                               value="@Model.Details" placeholder=" Edit Details" />
+                        <br />
+                        <label for="Approval">Approval :</label>
+                        @Html.RadioButton("isApproved", "True") Approved
+                        @Html.RadioButton("isApproved", "False") Not Approved
+                        <br />
+                    </div>
+
+                    <input type="Submit" value="Edit" class="btn btn-success btn-sm" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

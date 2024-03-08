@@ -1,0 +1,95 @@
+﻿@* @model IEnumerable<SampleMVC.Controllers.ArticlesController.MyCombinedViewModel> *@
+@{
+    int pageNumber = 0;
+    if (ViewData["pageNumber"] != null)
+    {
+        pageNumber = Convert.ToInt32(ViewData["pageNumber"]);
+    }
+}
+<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Category Page</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Category Page</h6>
+            </div>
+            <div class="card-body">
+                <!-- Example single danger button -->
+
+                <form method="post" asp-action="Paging">
+                    <div class="dropdown">
+                        <select name="selectedOption" class="btn btn-primary dropdown-toggle">
+                            @foreach (var category in Model.DataObject1)
+                            {
+                                if (Convert.ToInt32(ViewData["ID"]) == category.CategoryID)
+                                {
+                                    <option value="@category.CategoryID" selected="selected">@category.CategoryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@category.CategoryID">@category.CategoryName</option>
+                                }
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-primary m-2">Submit</button>
+                    </div>
+
+                    <br />
+                    @if (Model.DataObject2 != null)
+                    {
+                        <a asp-action="Create" asp-route-id="@ViewData["ID"]" class="btn btn-success btn-sm">Create New Article in This Category</a>
+
+                        <br />
+
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Article ID</th>
+                                <th>Title   </th>
+                                <th>Details</th>
+                                <th>Publish Date</th>
+                                <th>IsApproved</th>
+                                <th>Picture</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            @foreach (var article in Model.DataObject2)
+                            {
+                                <tr>
+                                    <td>@article.ArticleID</td>
+                                    <td>@article.Title</td>
+                                    <td>@article.Details</td>
+                                    <td>@article.PublishDate</td>
+                                    <td>@article.IsApproved</td>
+                                    <td>
+                                        <img src="/picture/@article.Pic" alt="" width="100px" height="100px">
+                                        </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@article.ArticleID" class="btn btn-warning btn-sm m-2 ">edit</a>
+                                        <a asp-action="Delete" asp-route-id="@article.ArticleID" class="btn btn-danger btn-sm m-2">delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+
+                        <a class="btn btn-outline-info btn-sm">First</a>
+
+                        <a href="/Articles/Paging?act=prev&pageNumber=@pageNumber&selectedOption=@ViewData["ID"]" class="btn btn-outline-info btn-sm">Prev</a>
+
+                        <a href="/Articles/Paging?act=next&pageNumber=@pageNumber&selectedOption=@ViewData["ID"]" class="btn btn-outline-info btn-sm">Next</a>
+
+                        <a class="btn btn-outline-info btn-sm">Last</a>
+                    }
+                </form>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
